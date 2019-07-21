@@ -1,2 +1,5 @@
-# bible-verse-listener
-Bible Verse Listener (a Node.js server that detects location and shows verses)
+# Bible Verse Listener
+
+Try it here: https://bibleverse.glitch.me
+
+See the code here: https://glitch.com/edit/#!/bibleverse
