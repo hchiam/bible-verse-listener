@@ -183,7 +183,7 @@ window.mobilecheck = function() {
 
 var isMobile = window.mobilecheck();
 if (isMobile) {
-  $('#use-laptop').text('Wait for the beep. For faster voice recognition, use a laptop.');
+  $('#use-laptop').text('Wait for the beep. For best results, use this on a laptop running a Chrome browser.');
   $('#use-laptop').css({color:'lightgrey', background:'darkgreen'});
 }
 
