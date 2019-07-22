@@ -46,6 +46,8 @@ header p a {
 
 #output {
   color: grey;
+  margin: auto;
+  width: 80%;
 }
 
 #main {
@@ -94,6 +96,8 @@ header p a {
 #verse-words {
   max-height: 100px;
   overflow: auto;
+  margin: auto;
+  width: 80%;
 }
 
 #copyright {
