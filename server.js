@@ -36,7 +36,7 @@ function getVerseWords(searchText, offset = 0) {
         const {data, meta} = JSON.parse(this.responseText);
         let copyright = '';
         let content = '';
-        if (data.passages && data.passages[0]) {
+        if (data && data.passages && data.passages[0]) {
           copyright = data.passages[0].copyright;
           content = data.passages[0].content;
         }

@@ -167,7 +167,9 @@ function showVerseWords(searchText, offset = 0) {
     let htmlContent = $('<div></div>');
     htmlContent.html(content);
     $('#verse-words').html(htmlContent);
-    $('#copyright').html('(' + copyright + ')');
+    if (copyright) {
+      $('#copyright').html('(' + copyright + ')');
+    }
   });
 }
 
