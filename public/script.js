@@ -159,6 +159,7 @@ function showLastFewPreviousVerses(lastVerse) {
 
 // -------------------------
 
+let numberOfApiCalls = 0;
 function showVerseWords(searchText, offset = 0) {
   let urlAPICall = `https://bibleverse.glitch.me/get-verse/${searchText}`;
   $.getJSON(urlAPICall, function(data) {
@@ -169,6 +170,11 @@ function showVerseWords(searchText, offset = 0) {
     $('#verse-words').html(htmlContent);
     if (copyright) {
       $('#copyright').html('(' + copyright + ')');
+    }
+    numberOfApiCalls++;
+    if (numberOfApiCalls > 100) {
+      $('#verse-words').prop('title', 'Note that the free API has a daily limit of 5000 calls.');
+      $('#many-api-calls').text('(Note: the free Bible verse API has a daily limit of 5000 calls.)');
     }
   });
 }

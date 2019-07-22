@@ -46,12 +46,12 @@ header p a {
 
 #output {
   color: grey;
-  margin: auto;
-  width: 80%;
 }
 
 #main {
   text-align: center;
+  margin: auto;
+  width: 80%;
 }
 
 #list-of-previous {
@@ -96,14 +96,17 @@ header p a {
 #verse-words {
   max-height: 100px;
   overflow: auto;
-  margin: auto;
-  width: 80%;
 }
 
 #copyright {
   color: grey;
   font-size: xx-small;
   text-align: right;
+}
+
+#many-api-calls {
+  color: yellow;
+  font-size: x-small;
 }
 
 #remind-user-about-listening {
