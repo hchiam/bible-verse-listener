@@ -105,3 +105,16 @@ header p a {
   font-size: xx-small;
   text-align: right;
 }
+
+#remind-user-about-listening {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  animation: blinker 4s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
