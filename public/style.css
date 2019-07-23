@@ -93,6 +93,11 @@ header p a {
   text-align: left;
 }
 
+.v:not(:first-child)::before { /* insert new line between each verse */
+  content:"\a";
+  white-space: pre;
+}
+
 #verse-words {
   max-height: 100px;
   overflow: auto;
