@@ -27,8 +27,10 @@ window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecogn
 
 if ('SpeechRecognition' in window) {
   $('#output').text('Speech recognition support detected.');
+  $('#remind-user-about-listening').text('🔴');
 } else {
   $('#output').text('Speech recognition support not detected.');
+  $('#remind-user-about-listening').text('');
 }
 
 let recognition;
