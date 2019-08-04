@@ -28,9 +28,15 @@ window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecogn
 if ('SpeechRecognition' in window) {
   $('#output').text('Speech recognition support detected.');
   $('#remind-user-about-listening').text('🔴');
+  $('#remind-user-about-listening').on('click', function() {
+    alert('Web Speech Recognition API is on Continuous Mode');
+  });
 } else {
   $('#output').text('Speech recognition support not detected.');
   $('#remind-user-about-listening').text('');
+  $('#remind-user-about-listening').on('click', function() {
+    // do nothing
+  });
 }
 
 let recognition;
@@ -191,7 +197,7 @@ window.mobilecheck = function() {
 
 var isMobile = window.mobilecheck();
 if (isMobile) {
-  $('#use-laptop').text('Wait for the beep. For best results, use this on a laptop running a Chrome browser.');
+  $('#use-laptop').text('Wait for the beep. For best results, use this on a computer running a Chrome browser.');
   $('#use-laptop').css({color:'lightgrey', background:'darkgreen'});
 }
 

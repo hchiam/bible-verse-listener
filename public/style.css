@@ -121,6 +121,11 @@ header p a {
   animation: blinker 4s linear infinite;
 }
 
+#remind-user-about-listening:hover {
+  font-size: x-large;
+  transition: 0.1s;
+}
+
 @keyframes blinker {
   50% {
     opacity: 0;
