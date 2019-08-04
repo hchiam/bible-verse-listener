@@ -197,7 +197,7 @@ window.mobilecheck = function() {
 
 var isMobile = window.mobilecheck();
 if (isMobile) {
-  $('#use-laptop').text('Wait for the beep. For best results, use this on a computer running a Chrome browser.');
+  $('#use-laptop').text('For best results, use this on a computer running a Chrome browser.');
   $('#use-laptop').css({color:'lightgrey', background:'darkgreen'});
 }
 
