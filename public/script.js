@@ -27,16 +27,8 @@ window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecogn
 
 if ('SpeechRecognition' in window) {
   $('#output').text('Speech recognition support detected.');
-  $('#remind-user-about-listening').text('🔴');
-  $('#remind-user-about-listening').on('click', function() {
-    alert('Web Speech Recognition API is on Continuous Mode');
-  });
 } else {
   $('#output').text('Speech recognition support not detected.');
-  $('#remind-user-about-listening').text('');
-  $('#remind-user-about-listening').on('click', function() {
-    // do nothing
-  });
 }
 
 let recognition;
@@ -167,23 +159,15 @@ function showLastFewPreviousVerses(lastVerse) {
 
 // -------------------------
 
-let numberOfApiCalls = 0;
 function showVerseWords(searchText, offset = 0) {
-  let urlAPICall = `https://bibleverse.glitch.me/get-verse/${searchText}`;
+  let urlAPICall = `https://bibleverse-backup.glitch.me/get-verse/${searchText}`;
   $.getJSON(urlAPICall, function(data) {
     let copyright = data.copyright;
     let content = data.content;
     let htmlContent = $('<div></div>');
     htmlContent.html(content);
     $('#verse-words').html(htmlContent);
-    if (copyright) {
-      $('#copyright').html('(' + copyright + ')');
-    }
-    numberOfApiCalls++;
-    if (numberOfApiCalls > 100) {
-      $('#verse-words').prop('title', 'Note that the free API has a daily limit of 5000 calls.');
-      $('#many-api-calls').text('(Note: the free Bible verse API has a daily limit of 5000 calls.)');
-    }
+    $('#copyright').html('(' + copyright + ')');
   });
 }
 
@@ -197,7 +181,7 @@ window.mobilecheck = function() {
 
 var isMobile = window.mobilecheck();
 if (isMobile) {
-  $('#use-laptop').text('For best results, use this on a computer running a Chrome browser.');
+  $('#use-laptop').text('Wait for the beep. For faster voice recognition, use a laptop.');
   $('#use-laptop').css({color:'lightgrey', background:'darkgreen'});
 }
 

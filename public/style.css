@@ -50,8 +50,6 @@ header p a {
 
 #main {
   text-align: center;
-  margin: auto;
-  width: 80%;
 }
 
 #list-of-previous {
@@ -93,11 +91,6 @@ header p a {
   text-align: left;
 }
 
-.v:not(:first-child)::before { /* insert new line between each verse */
-  content:"\a";
-  white-space: pre;
-}
-
 #verse-words {
   max-height: 100px;
   overflow: auto;
@@ -107,27 +100,4 @@ header p a {
   color: grey;
   font-size: xx-small;
   text-align: right;
-}
-
-#many-api-calls {
-  color: yellow;
-  font-size: x-small;
-}
-
-#remind-user-about-listening {
-  position: absolute;
-  top: 5px;
-  left: 10px;
-  animation: blinker 4s linear infinite;
-}
-
-#remind-user-about-listening:hover {
-  font-size: x-large;
-  transition: 0.1s;
-}
-
-@keyframes blinker {
-  50% {
-    opacity: 0;
-  }
 }
