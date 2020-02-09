@@ -1,7 +1,9 @@
 // trying to understand this code?
 // I recommend starting at "const prompts" and recognition.onresult
 
-// NOTE: This diverges from https://codepen.io/hchiam/pen/XOPdgP
+// NOTE: This diverges from https://codepen.io/hchiam/pen/XOPdgP (and the glitch.me demo too)
+
+let apiKey = 'USER MUST ENTER THIS';
 
 var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 if (!isChrome) {
@@ -169,8 +171,12 @@ function showLastFewPreviousVerses(lastVerse) {
 
 let numberOfApiCalls = 0;
 function showVerseWords(searchText, offset = 0) {
-  let urlAPICall = `https://bibleverse.glitch.me/get-verse/${searchText}`;
-  $.getJSON(urlAPICall, function(data) {
+  // let urlAPICall = `https://bibleverse.glitch.me/get-verse/${searchText}`;
+  // $.getJSON(urlAPICall, function(data) {
+  apiKey = window.prompt('Please enter API Key to display verse words:');
+  if (!apiKey) return;
+  getVerseWords(searchText)
+  .then(function(data) {
     let copyright = data.copyright;
     let content = data.content;
     let htmlContent = $('<div></div>');
@@ -184,6 +190,38 @@ function showVerseWords(searchText, offset = 0) {
       $('#verse-words').prop('title', 'Note that the free API has a daily limit of 5000 calls.');
       $('#many-api-calls').text('(Note: the free Bible verse API has a daily limit of 5000 calls.)');
     }
+  }, function(error) {
+    console.log(error);
+  });
+}
+
+function getVerseWords(searchText, offset = 0) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.withCredentials = false;
+    xhr.addEventListener('readystatechange', function() {
+      if (this.readyState === this.DONE) {
+        const {data, meta} = JSON.parse(this.responseText);
+        let copyright = '';
+        let content = '';
+        if (data && data.passages && data.passages[0]) {
+          copyright = data.passages[0].copyright;
+          content = data.passages[0].content;
+        }
+        
+        resolve({
+          content: content,
+          copyright: copyright
+        });
+      }
+    });
+    
+    xhr.open('GET', `https://api.scripture.api.bible/v1/bibles/06125adad2d5898a-01/search?query=${searchText}&offset=${offset}`);
+    xhr.setRequestHeader('api-key', apiKey);
+    xhr.onerror = () => reject(xhr.statusText);
+    xhr.send();
+  }).catch(function(error) {
+    console.log(error);
   });
 }
 

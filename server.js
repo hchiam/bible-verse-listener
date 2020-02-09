@@ -1,3 +1,7 @@
+/**
+ * NOTE: This server.js file is NOT used in the surge.sh deployment.
+ */
+
 const express = require('express');
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const request = require("request");
@@ -5,7 +9,7 @@ const app = express();
 const apiKey = process.env.APIKEY;
 
 app.get("/", (request, response) => {
-  response.sendFile(__dirname + '/views/index.html');
+  response.sendFile(__dirname + '/index.html');
 });
 
 app.get("/get-verse/:searchText", (request, response) => {
