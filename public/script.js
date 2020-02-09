@@ -3,7 +3,7 @@
 
 // NOTE: This diverges from https://codepen.io/hchiam/pen/XOPdgP (and the glitch.me demo too)
 
-let apiKey = 'USER MUST ENTER THIS';
+let apiKey = '' || localStorage.getItem('bibleverse-apiKey');
 
 var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 if (!isChrome) {
@@ -173,8 +173,10 @@ let numberOfApiCalls = 0;
 function showVerseWords(searchText, offset = 0) {
   // let urlAPICall = `https://bibleverse.glitch.me/get-verse/${searchText}`;
   // $.getJSON(urlAPICall, function(data) {
-  apiKey = window.prompt('Please enter API Key to display verse words:');
-  if (!apiKey) return;
+  if (!apiKey) {
+    apiKey = window.prompt('Please enter API Key to display verse words:');
+    localStorage.setItem('bibleverse-apiKey', apiKey);
+  }
   getVerseWords(searchText)
   .then(function(data) {
     let copyright = data.copyright;
