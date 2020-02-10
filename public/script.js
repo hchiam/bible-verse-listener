@@ -3,7 +3,12 @@
 
 // NOTE: This diverges from https://codepen.io/hchiam/pen/XOPdgP (and the glitch.me demo too)
 
-let apiKey = '' || localStorage.getItem('bibleverse-apiKey');
+// http -> https
+if (window.location.protocol !== 'https:') {
+  window.location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+}
+
+let apiKey = '' || getCookie('bibleverse-apiKey');
 
 var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 if (!isChrome) {
@@ -175,7 +180,7 @@ function showVerseWords(searchText, offset = 0) {
   // $.getJSON(urlAPICall, function(data) {
   if (!apiKey) {
     apiKey = window.prompt('Please enter API Key to display verse words:');
-    localStorage.setItem('bibleverse-apiKey', apiKey);
+    setCookie('bibleverse-apiKey', apiKey);
   }
   getVerseWords(searchText)
   .then(function(data) {
@@ -242,3 +247,26 @@ if (isMobile) {
 }
 
 // ----------------------
+
+function setCookie(name, value, expiryDays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (expiryDays * 24 * 60 * 60 * 1000));
+  const expires = (expiryDays) ? ("expires=" + d.toGMTString() + ';') : ('');
+  document.cookie = name + "=" + value + ";" + expires + "path=/; Secure;"; // HttpOnly; Domain=bibleverse.surge.sh; SameSite=Strict;";
+}
+
+function getCookie(name) {
+  const cookieParts = decodeURIComponent(document.cookie).split(';');
+  for(var i = 0; i < cookieParts.length; i++) {
+    const cookiePart = cookieParts[i];
+    while (cookiePart.charAt(0) === ' ') {
+      cookiePart = cookiePart.substring(1);
+    }
+    if (cookiePart.indexOf(name + '=') === 0) {
+      return cookiePart.substring(name.length + 1, cookiePart.length);
+    }
+  }
+  return "";
+}
+
+// -------------------------
