@@ -252,13 +252,13 @@ function setCookie(name, value, expiryDays) {
   const d = new Date();
   d.setTime(d.getTime() + (expiryDays * 24 * 60 * 60 * 1000));
   const expires = (expiryDays) ? ("expires=" + d.toGMTString() + ';') : ('');
-  document.cookie = name + "=" + value + ";" + expires + "path=/; Secure;"; // HttpOnly; Domain=bibleverse.surge.sh; SameSite=Strict;";
+  document.cookie = name + "=" + value + ";" + expires + "path=/; Domain=bibleverse.surge.sh; SameSite=Strict; Secure;"; // HttpOnly;";
 }
 
 function getCookie(name) {
   const cookieParts = decodeURIComponent(document.cookie).split(';');
   for(var i = 0; i < cookieParts.length; i++) {
-    const cookiePart = cookieParts[i];
+    let cookiePart = cookieParts[i];
     while (cookiePart.charAt(0) === ' ') {
       cookiePart = cookiePart.substring(1);
     }
