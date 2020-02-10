@@ -178,7 +178,7 @@ let numberOfApiCalls = 0;
 function showVerseWords(searchText, offset = 0) {
   // let urlAPICall = `https://bibleverse.glitch.me/get-verse/${searchText}`;
   // $.getJSON(urlAPICall, function(data) {
-  if (!apiKey) {
+  if (!apiKey || apiKey === '') {
     apiKey = window.prompt('Please enter API Key to display verse words:');
     setCookie('bibleverse-apiKey', apiKey);
   }
@@ -208,18 +208,24 @@ function getVerseWords(searchText, offset = 0) {
     xhr.withCredentials = false;
     xhr.addEventListener('readystatechange', function() {
       if (this.readyState === this.DONE) {
-        const {data, meta} = JSON.parse(this.responseText);
-        let copyright = '';
-        let content = '';
-        if (data && data.passages && data.passages[0]) {
-          copyright = data.passages[0].copyright;
-          content = data.passages[0].content;
+        if (this.status === 200) {
+          const {data, meta} = JSON.parse(this.responseText);
+          let copyright = '';
+          let content = '';
+          if (data && data.passages && data.passages[0]) {
+            copyright = data.passages[0].copyright;
+            content = data.passages[0].content;
+          }
+          
+          resolve({
+            content: content,
+            copyright: copyright
+          });
+        } else {
+          apiKey = '';
+          setCookie('bibleverse-apiKey', '');
+          reject(xhr.statusText);
         }
-        
-        resolve({
-          content: content,
-          copyright: copyright
-        });
       }
     });
     
