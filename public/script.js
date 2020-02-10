@@ -259,6 +259,7 @@ function setCookie(name, value, expiryDays) {
   d.setTime(d.getTime() + (expiryDays * 24 * 60 * 60 * 1000));
   const expires = (expiryDays) ? ("expires=" + d.toGMTString() + ';') : ('');
   document.cookie = name + "=" + value + ";" + expires + "path=/; Domain=bibleverse.surge.sh; SameSite=Strict; Secure;"; // HttpOnly;";
+  // TODO: find a better way
 }
 
 function getCookie(name) {
